@@ -1,0 +1,14 @@
+@import "src/variabels";
+
+.sponsors-wrapper {
+  margin-top: 40px;
+  padding: 40px 0;
+  background-color: $blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.sponsor-image{
+  object-fit: contain;
+}

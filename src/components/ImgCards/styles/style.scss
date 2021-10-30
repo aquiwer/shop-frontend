@@ -1,0 +1,52 @@
+@import "src/mixins";
+@import "src/variabels";
+.image {
+  min-width: 400px;
+  height: 460px;
+  -webkit-clip-path: polygon(46% 0, 85% 0, 55% 99%, 13% 100%);
+  clip-path: polygon(46% 0, 85% 0, 55% 99%, 13% 100%);
+  object-fit: cover;
+  transition: .3s;
+  &:hover{
+    transform: scale(1.1);
+  }
+  &:first-child {
+
+    height: 400px;
+    min-width: 400px;
+    transform: translate(15px, 20px);
+    z-index: 1;
+  }
+
+  &:nth-child(2) {
+    transform: translateX(-240px);
+  }
+
+  &:last-child {
+    height: 400px;
+    min-width: 400px;
+    transform: translate(-515px, 20px);
+  }
+}
+@keyframes rgbDropShadow {
+  0%{
+    filter: drop-shadow(0px 4px 250px rgba(255, 255, 255, 0.25))
+  }
+  25%{
+    filter: drop-shadow(0px 4px 250px rgba(255, 255, 255, 0.50))
+  }
+  50%{
+    filter: drop-shadow(0px 4px 250px rgba(255, 255, 255, 0.75))
+  }
+  75%{
+    filter: drop-shadow(0px 4px 250px rgb(35, 98, 213))
+  }
+}
+.image-wrapper {
+  //filter: drop-shadow(0px 4px 250px rgba(255, 255, 255, 0.25));
+  animation: ease-in-out infinite 5s rgbDropShadow;
+  @include offDefaultStyleOfFields;
+  position: relative;
+  display: flex;
+  width: 650px;
+}

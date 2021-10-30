@@ -1,0 +1,33 @@
+@import "src/variabels";
+@import "src/mixins";
+.search-bar-form {
+  min-width: 530px;
+  background-color: $lightBlue;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 25px;
+  fieldset{
+    @include offDefaultStyleOfFields;
+  }
+}
+
+.search-bar-field{
+  color: $lightColor;
+  height: 100%;
+  min-width: 490px;
+  font-size: 18px;
+  @include offDefaultStyleOfFields;
+  &::placeholder{
+    color: $lightColor;
+  }
+}
+.search-bar-button{
+  @include offDefaultStyleOfFields;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}

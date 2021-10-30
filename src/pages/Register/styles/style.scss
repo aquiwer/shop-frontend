@@ -1,0 +1,68 @@
+@import "src/variabels";
+
+fieldset {
+  border: none;
+}
+
+.registerPage-wrapper {
+  display: grid;
+  place-items: center;
+  gap: 20px;
+  background-color: $darkBlue;
+}
+
+.form-field, .form-button {
+  text-decoration: none;
+  color: $defaultColor;
+  background-color: $blue;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  filter: drop-shadow(0 0 3px $darkColor)
+}
+.form-button{
+  cursor: pointer;
+}
+.registerPage-edit-field {
+  padding: 10px 15px;
+  background-color: $blue;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  color: $defaultColor;
+
+  &::placeholder {
+    color: $defaultColor;
+  }
+}
+
+.form-wrapper{
+  display: flex;
+  align-items: center;
+  max-width: 450px;
+  flex-wrap: wrap;
+  grid-gap: 20px;
+  gap: 20px;
+  padding-top: 50px;
+}
+
+.profile-edit-elem-icon{
+  width: auto;
+  height: 35px;
+}
+
+.form-user-button{
+  display: flex;
+  align-items: center;
+  padding: 5px 45px;
+  background-color: $blue;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  color: $defaultColor;
+
+  &::placeholder {
+    color: $defaultColor;
+  }
+}

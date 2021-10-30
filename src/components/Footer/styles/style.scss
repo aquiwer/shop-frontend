@@ -1,0 +1,12 @@
+@import "src/variabels";
+
+.footer-wrapper{
+  padding: 20px 0;
+  background-color: $lightBlue;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+.paySystem-logo:last-child{
+  margin-left: 40px;
+}

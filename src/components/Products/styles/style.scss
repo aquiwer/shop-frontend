@@ -1,0 +1,53 @@
+@import "src/variabels";
+
+.products-wrapper{
+  position: relative;
+  width: 100vw;
+  background-color: $darkBlue;
+}
+.tabs-wrapper{
+  padding: 36px 0;
+  background: $darkBlue;
+}
+.tab-link {
+  cursor: pointer;
+  list-style: none;
+  background: #344C7A;
+  border-radius: 5px;
+  width: 254px;
+  height: 55px;
+  padding: 7px 63px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $defaultColor;
+  font-size: 36px;
+}
+
+.tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.tabs-content {
+  background: #344C7A;
+}
+
+.tabs-content-title-wrapper{
+  display: flex;
+  justify-content: center;
+}
+.tabs-content-title{
+  color: $defaultColor;
+  font-size: 72px;
+  font-weight: 400;
+}
+
+.products-container{
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}

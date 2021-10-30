@@ -1,0 +1,65 @@
+@import "src/variabels";
+
+.cart-body {
+  height: auto;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  background-color: $darkBlue;
+}
+
+.cart-wrapper {
+  padding: 20px 0;
+  margin: 60px 0;
+  border-radius: 15px;
+  background-color: $lightBlue;
+  width: calc(100% - 350px);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+.cart-controller{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.cart-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cart-button-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.cart-button-title {
+  font-size: 48px;
+}
+.cart-button{
+  width: 250px;
+  padding: 10px 25px;
+  border-radius: 15px;
+  color: $defaultColor;
+  text-decoration: none;
+}
+.button-cancel{
+  background-color: $red;
+}
+.button-shop{
+  background-color: $green;
+}
+.button-buy{
+  background-color: $blue;
+}

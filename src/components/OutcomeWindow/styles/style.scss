@@ -1,0 +1,55 @@
+@import "src/variabels";
+.window-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  width: 1200px;
+  height: 500px;
+  background: rgba(35, 98, 213, 0.14);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.window-wrapper {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  z-index: 20000;
+  transform: translate(-50%, 50%);
+  top: 10%;
+  left: 50%;
+}
+
+.window-icon{
+  width: 100px;
+  height: 100px;
+  padding: 20px;
+  border-radius: 50%;
+  background-color: $blue;
+}
+
+.window-title{
+  font-size: 48px;
+  color: $defaultColor;
+}
+
+.window-button-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $blue;
+  padding: 10px;
+  border-radius: 15px;
+  button{
+    font-size: 48px;
+  }
+  img{
+    width: 55px;
+    height: 55px;
+  }
+}

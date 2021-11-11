@@ -4,7 +4,7 @@ import {ICart} from "../store/reducers/cart-reducer/types";
 
 
 export const instance = axios.create({
-    baseURL: "http://localhost:4000/api/",
+    baseURL: "http://localhost:5000/api/",
     withCredentials: true,
 });
 

@@ -22,7 +22,7 @@ export const Profile = () => {
     const setNewData = (e: any) => {
         e.preventDefault();
         setEditMode(false)
-        dispatch(userChangeDataThunk({username:userData.username, password: userData.password, email:userData.email}))
+        dispatch(userChangeDataThunk({login: userData.login, username:userData.username, password: userData.password, email:userData.email}))
     }
 
 

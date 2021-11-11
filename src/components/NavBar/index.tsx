@@ -9,6 +9,7 @@ import exitIcon from '../../assets/icons/exit.svg'
 
 export const NavBar = () => {
     const isAuth = useTypedSelector(state => state.userReducer.user?.isAuth ?? true);
+
     const user = useTypedSelector(state => state.userReducer.user)
     const dispatch = useDispatch();
     return (

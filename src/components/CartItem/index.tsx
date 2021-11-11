@@ -15,7 +15,7 @@ export const CartItem = ({title, price, count, photo, _id}: ICart) => {
         <article className="cart-item">
             <section className='cart-main-info'>
                 <div>
-                    <div className='cart-image'><img src={`http://localhost:3000/static/${photo?.substr(40)}`} alt="title"/></div>
+                    <div className='cart-image'><img src={`http://localhost:5000/static/${photo?.substr(40)}`} alt="title"/></div>
                 </div>
                 <div>
                     <h2 className='cart-product-title'>{title}</h2>

@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      dockerfile: ./Dockerfile
+    image: "dimovski/shopfront"
+    ports:
+      - "3000:3000"

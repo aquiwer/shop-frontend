@@ -2,6 +2,7 @@ import {IUserAction, IUserState, UserActionEnum} from "./types";
 
 const initialState: IUserState = {
     user: {
+        login: "",
         username: "",
         email: "",
         password: "",
@@ -18,7 +19,7 @@ export const userReducer = (state = initialState, action: IUserAction) => {
         case UserActionEnum.CHANGE_USER:
             return {...state, user: {...state.user, ...action.payload}}
         case UserActionEnum.EXIT:
-            return {...state, user: {username: "", password: "", email: "", balance: 0, isAuth: action.payload}}
+            return {...state, user: {login: "", username: "", password: "", email: "", balance: 0, isAuth: action.payload}}
         default:
             return state;
     }

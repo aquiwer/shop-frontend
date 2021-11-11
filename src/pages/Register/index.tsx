@@ -13,16 +13,20 @@ import {UserActionCreators} from "../../store/action-creators";
 
 export const Register:FC = () => {
     const [username, setUsername] = useState("");
+    const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const dispatch = useDispatch();
     const registerUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        dispatch(userRegisterThunk({username, email, password}))
+        dispatch(userRegisterThunk({login, username, email, password}))
     }
     return (
         <article className="registerPage-wrapper">
             <form className='form-wrapper'>
+                <fieldset>
+                    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login" className='registerPage-edit-field' type="text"/>
+                </fieldset>
                 <fieldset>
                     <input required={true} onChange={(e) => setUsername(e.currentTarget.value)} placeholder="Your username" className='registerPage-edit-field' type="text"/>
                 </fieldset>

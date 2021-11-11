@@ -16,10 +16,11 @@ import "./styles/style.scss"
 export const Login:FC = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [login, setLogin] = useState("");
     const dispatch = useDispatch();
     const registerUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        dispatch(userLoginThunk({username, password}))
+        dispatch(userLoginThunk({login, username, password}))
     }
 
 
@@ -27,6 +28,9 @@ export const Login:FC = () => {
     return (
         <article className="registerPage-wrapper">
             <form className='form-wrapper'>
+                <fieldset>
+                    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login" className='registerPage-edit-field' type="text"/>
+                </fieldset>
                 <fieldset>
                     <input required={true} onChange={(e) => setUsername(e.currentTarget.value)} placeholder="Your username" className='registerPage-edit-field' type="text"/>
                 </fieldset>

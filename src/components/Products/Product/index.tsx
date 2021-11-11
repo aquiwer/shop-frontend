@@ -19,7 +19,7 @@ export const Product = ({title, describe, price, count, photo}: IProduct) => {
     return (
         <article className="product-wrapper">
             <picture>
-                <img className="product-image" src={`http://localhost:3000/static/${photo?.substr(40)}`} alt={title}/>
+                <img className="product-image" src={`http://localhost:5000/static/${photo?.substr(40)}`} alt={title}/>
             </picture>
             <section>
                 <div>

@@ -4,7 +4,7 @@ import {ICart} from "../store/reducers/cart-reducer/types";
 
 
 export const instance = axios.create({
-    baseURL: "http://localhost:3000/api/",
+    baseURL: "http://localhost:4000/api/",
     withCredentials: true,
 });
 
@@ -21,6 +21,7 @@ export const Api = {
         )
     },
     changeUserData(userData: IUser){
+        console.log(userData, 'userdata')
         return (
             instance.put(`user`, userData).then(res => res.data)
         )

@@ -15,14 +15,14 @@ export const Profile = () => {
     const [editMode, setEditMode] = useState(false);
     const userData = useTypedSelector(state => state.userReducer.user)
     const dispatch = useDispatch();
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+    const [username, setUserName] = useState(userData.username);
+    const [password, setPassword] = useState(userData.password);
+    const [email, setEmail] = useState(userData.email);
 
     const setNewData = (e: any) => {
         e.preventDefault();
         setEditMode(false)
-        dispatch(userChangeDataThunk({username, password, email}))
+        dispatch(userChangeDataThunk({username:userData.username, password: userData.password, email:userData.email}))
     }
 
 

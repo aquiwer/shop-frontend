@@ -22,7 +22,13 @@ export const Profile = () => {
     const setNewData = (e: any) => {
         e.preventDefault();
         setEditMode(false)
-        dispatch(userChangeDataThunk({login: userData.login, username:userData.username, password: userData.password, email:userData.email}))
+        dispatch(userChangeDataThunk({
+            _id: userData._id,
+            login: userData.login,
+            username: username && username.trim().length ? username : userData.username,
+            password: password && password.trim().length ? password : userData.password,
+            email: email && email.trim().length ? email : userData.email
+        }))
     }
 
 
@@ -31,7 +37,7 @@ export const Profile = () => {
             <section className='profile-edit-elems'>
                 <figure>{
                     //@ts-ignore
-                   <div className="profile-user-avatar">{userData.username[0]}</div>}</figure>
+                    <div className="profile-user-avatar">{userData.username[0]}</div>}</figure>
                 <section>
                     <div>
                         <form className='profile-edit-elems-form'>
@@ -39,7 +45,9 @@ export const Profile = () => {
                                 {
                                     editMode ?
                                         <section className='profile-edit-data-container'>
-                                            <div><input onChange={(e) => setUserName(e.currentTarget.value)} placeholder="Your new name" className='profile-edit-field' type="text"/></div>
+                                            <div><input onChange={(e) => setUserName(e.currentTarget.value)}
+                                                        placeholder="Your new name" className='profile-edit-field'
+                                                        type="text"/></div>
                                             <div>
                                                 <button onClick={(e) => setNewData(e)}>
                                                     <img src={arrow} alt="arrow"/>
@@ -80,7 +88,9 @@ export const Profile = () => {
                         {
                             editMode ?
                                 <section className='profile-edit-data-container'>
-                                    <div><input onChange={(e) => setEmail(e.currentTarget.value)} placeholder="Your new email" className='profile-edit-field' type="text"/></div>
+                                    <div><input onChange={(e) => setEmail(e.currentTarget.value)}
+                                                placeholder="Your new email" className='profile-edit-field'
+                                                type="text"/></div>
                                     <div>
                                         <button onClick={(e) => setNewData(e)}>
                                             <img src={arrow} alt="arrow"/>
@@ -108,7 +118,9 @@ export const Profile = () => {
                             editMode ?
                                 <section className='profile-edit-data-container'>
                                     <div>
-                                        <input onChange={(e) => setPassword(e.currentTarget.value)} placeholder="Your new password" className='profile-edit-field' type="password"/></div>
+                                        <input onChange={(e) => setPassword(e.currentTarget.value)}
+                                               placeholder="Your new password" className='profile-edit-field'
+                                               type="password"/></div>
                                     <div>
                                         <button onClick={(e) => setNewData(e)}>
                                             <img src={arrow} alt="arrow"/>
@@ -156,7 +168,7 @@ export const Profile = () => {
             </section>
             <section className='profile-cards-wrapper'>
                 {
-                    [1,2,3].map(i => <ImgCard key={i}/>)
+                    [1, 2, 3].map(i => <ImgCard key={i}/>)
                 }
             </section>
         </article>

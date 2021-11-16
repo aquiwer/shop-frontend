@@ -6,6 +6,7 @@ export interface IUser {
     balance?: number,
     photo?: string
     isAuth?: boolean ,
+    _id?: string
 }
 
 export interface IUserState {

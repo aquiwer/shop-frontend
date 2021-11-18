@@ -11,6 +11,7 @@ import {RouteNames} from "../../router/router";
 import {useTypedSelector} from "../../utils/hooks/useTypedSelector";
 
 export const Register: FC = () => {
+
     const [username, setUsername] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");

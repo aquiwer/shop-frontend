@@ -22,7 +22,7 @@ export const Register: FC = () => {
     const dispatch = useDispatch();
     const checkUniqCodes = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        if (uniqCode.length === 8) {
+        if (uniqCode.length === 6) {
             dispatch(userCheckUniqCodesThunk(uniqCode))
         }
     }
@@ -71,8 +71,8 @@ export const Register: FC = () => {
                     </fieldset>
                     :
                     <fieldset>
-                        <button onClick={(e) => checkUniqCodes(e)} disabled={uniqCode.length !== 8}
-                                className={uniqCode.length !== 8 ? " error-button form-button" : "form-button"}>
+                        <button onClick={(e) => checkUniqCodes(e)} disabled={uniqCode.length !== 6}
+                                className={uniqCode.length !== 6 ? " error-button form-button" : "form-button"}>
                             Confirm
                         </button>
                     </fieldset>

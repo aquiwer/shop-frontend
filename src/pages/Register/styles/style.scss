@@ -21,6 +21,10 @@ fieldset {
   outline: none;
   filter: drop-shadow(0 0 3px $darkColor)
 }
+.error-button{
+  cursor: none;
+  opacity: .1;
+}
 .form-button{
   cursor: pointer;
 }

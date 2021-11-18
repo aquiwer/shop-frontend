@@ -1,6 +1,6 @@
 import {
     IUser,
-    setExitedChangingAction,
+    setExitedChangingAction, setUniqCodeAction,
     setUserAction,
     setUsersChangingAction,
     UserActionEnum
@@ -24,7 +24,11 @@ import {HelperActionEnum, setIsShow} from "../reducers/helper-reducer/types";
 export const UserActionCreators = {
     setUser: (user: IUser): setUserAction => ({type: UserActionEnum.SET_USER, payload: user}),
     changeUser: (user: IUser): setUsersChangingAction => ({type: UserActionEnum.CHANGE_USER, payload: user}),
-    exit: ():  setExitedChangingAction => ({type: UserActionEnum.EXIT, payload: false})
+    exit: (): setExitedChangingAction => ({type: UserActionEnum.EXIT, payload: false}),
+    setUniqCode: (isAvailable: boolean): setUniqCodeAction => ({
+        type: UserActionEnum.SET_UNIQ_CODE,
+        payload: isAvailable
+    }),
 }
 
 export const ProductsActionCreators = {

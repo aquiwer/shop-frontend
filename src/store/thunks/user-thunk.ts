@@ -18,6 +18,35 @@ export const userRegisterThunk = (userData: IRegister) => {
     }
 }
 
+
+export const userSendUniqCodeThunk = (email: string) => {
+
+    return async (dispatch: AppDispatch) => {
+        try {
+
+            const response = await Api.createUniqCode(email);
+            console.log(response, "response")
+
+        } catch (e: any) {
+            console.error(e)
+        }
+    }
+}
+export const userCheckUniqCodesThunk = (code: string) => {
+
+    return async (dispatch: AppDispatch) => {
+        try {
+
+            const response = await Api.checkUniqCodes(code);
+            console.log(response, "response")
+            console.log("Im here")
+            dispatch(UserActionCreators.setUniqCode(Boolean(response)))
+        } catch (e: any) {
+            console.error(e)
+        }
+    }
+}
+
 export const userLoginThunk = (userData: ILogin) => {
     return async (dispatch: AppDispatch) => {
         try {

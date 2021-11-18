@@ -1,46 +1,92 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import discount from "../../assets/icons/discount.svg";
 import delivery from "../../assets/icons/delivery.svg";
 import support from "../../assets/icons/support.svg";
 import {ImgCard} from "../../components/ImgCards";
-import arrow from "../../assets/icons/arrowRight.svg";
 import './styles/style.scss'
 import {useDispatch} from "react-redux";
-import {userLoginThunk, userRegisterThunk} from "../../store/thunks/user-thunk";
+import {userCheckUniqCodesThunk, userRegisterThunk, userSendUniqCodeThunk} from "../../store/thunks/user-thunk";
 import {NavLink} from "react-router-dom";
 import {RouteNames} from "../../router/router";
-import {UserActionCreators} from "../../store/action-creators";
+import {useTypedSelector} from "../../utils/hooks/useTypedSelector";
 
-export const Register:FC = () => {
+export const Register: FC = () => {
+
     const [username, setUsername] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [uniqCode, setUniqCode] = useState("");
+    const [enableUniqCodeField, setEnableUniqCodeField] = useState(false);
+    const isUniqCode = useTypedSelector(state => state.userReducer.isUniqCode);
+
     const dispatch = useDispatch();
-    const registerUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const checkUniqCodes = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
+        if (uniqCode.length === 6) {
+            dispatch(userCheckUniqCodesThunk(uniqCode))
+        }
+    }
+    const sendUniqCode = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        setEnableUniqCodeField(true);
+        dispatch(userSendUniqCodeThunk(email));
+    }
+    const registerUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
         dispatch(userRegisterThunk({login, username, email, password}))
     }
+    // @ts-ignore
     return (
         <article className="registerPage-wrapper">
             <form className='form-wrapper'>
                 <fieldset>
-                    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login" className='registerPage-edit-field' type="text"/>
+                    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login"
+                           className='registerPage-edit-field' type="text"/>
                 </fieldset>
                 <fieldset>
-                    <input required={true} onChange={(e) => setUsername(e.currentTarget.value)} placeholder="Your username" className='registerPage-edit-field' type="text"/>
+                    <input required={true} onChange={(e) => setUsername(e.currentTarget.value)}
+                           placeholder="Your username" className='registerPage-edit-field' type="text"/>
                 </fieldset>
                 <fieldset>
-                    <input required={true} onChange={(e) => setPassword(e.currentTarget.value)} placeholder="Your password" className='registerPage-edit-field' type="password"/>
+                    <input required={true} onChange={(e) => setPassword(e.currentTarget.value)}
+                           placeholder="Your password" className='registerPage-edit-field' type="password"/>
                 </fieldset>
                 <fieldset>
-                    <input required={true} onChange={(e) => setEmail(e.currentTarget.value)} placeholder="Your email" className='registerPage-edit-field' type="text"/>
+                    <input required={true} onChange={(e) => setEmail(e.currentTarget.value)} placeholder="Your email"
+                           className='registerPage-edit-field' type="text"/>
                 </fieldset>
+                {enableUniqCodeField &&
                 <fieldset>
-                    <button onClick={(e) => registerUser(e)} className='form-button'>
-                        Register
-                    </button>
+                    <input required={true} onChange={(e) => setUniqCode(e.currentTarget.value)}
+                           placeholder="Type uniq code from ur mail"
+                           className='registerPage-edit-field' type="text"/>
                 </fieldset>
+                }
+                {!enableUniqCodeField ?
+                    <fieldset>
+                        <button onClick={(e) => sendUniqCode(e)}
+                                className={"form-button"}>
+                            Register
+                        </button>
+                    </fieldset>
+                    :
+                    <fieldset>
+                        <button onClick={(e) => checkUniqCodes(e)} disabled={uniqCode.length !== 6}
+                                className={uniqCode.length !== 6 ? " error-button form-button" : "form-button"}>
+                            Confirm
+                        </button>
+                    </fieldset>
+                }
+                {
+                    isUniqCode && <fieldset>
+                        <button onClick={(e) => registerUser(e)}
+                                className={"form-button"}>
+                            Register
+                        </button>
+                    </fieldset>
+                }
+
                 <fieldset>
                     <NavLink to={RouteNames.LOGIN} className='form-button'>
                         I have the account
@@ -69,7 +115,7 @@ export const Register:FC = () => {
             </section>
             <section className='profile-cards-wrapper'>
                 {
-                    [1,2,3].map(i => <ImgCard key={i}/>)
+                    [1, 2, 3].map(i => <ImgCard key={i}/>)
                 }
             </section>
         </article>

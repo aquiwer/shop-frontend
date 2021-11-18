@@ -31,7 +31,16 @@ export const Api = {
             instance.get("products").then(res => res.data)
         )
     },
-
+    checkUniqCodes(uniqCode: string) {
+      return (
+          instance.post('uniqCode', {uniqCode}).then(res => res.data)
+      )
+    },
+    createUniqCode(email: string){
+      return (
+          instance.post('newUniqCode', {email}).then(res => res.data)
+      )
+    },
     addToCart(productData: ICart) {
         return (
             instance.post("cart", productData).then(res => res.data)

@@ -9,9 +9,9 @@ import {userCheckUniqCodesThunk, userRegisterThunk, userSendUniqCodeThunk} from 
 import {NavLink} from "react-router-dom";
 import {RouteNames} from "../../router/router";
 import {useTypedSelector} from "../../utils/hooks/useTypedSelector";
+import Modal from 'react-modal';
 
 export const Register: FC = () => {
-
     const [username, setUsername] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
@@ -21,6 +21,10 @@ export const Register: FC = () => {
     const isUniqCode = useTypedSelector(state => state.userReducer.isUniqCode);
 
     const dispatch = useDispatch();
+    const isValidEmail = (email: string) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
     const checkUniqCodes = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         if (uniqCode.length === 6) {
@@ -30,7 +34,10 @@ export const Register: FC = () => {
     const sendUniqCode = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         setEnableUniqCodeField(true);
-        dispatch(userSendUniqCodeThunk(email));
+        isValidEmail(email)
+        if (email.trim().length) {
+            dispatch(userSendUniqCodeThunk(email));
+        }
     }
     const registerUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
@@ -39,59 +46,94 @@ export const Register: FC = () => {
     // @ts-ignore
     return (
         <article className="registerPage-wrapper">
-            <form className='form-wrapper'>
-                <fieldset>
-                    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login"
-                           className='registerPage-edit-field' type="text"/>
-                </fieldset>
-                <fieldset>
-                    <input required={true} onChange={(e) => setUsername(e.currentTarget.value)}
-                           placeholder="Your username" className='registerPage-edit-field' type="text"/>
-                </fieldset>
-                <fieldset>
-                    <input required={true} onChange={(e) => setPassword(e.currentTarget.value)}
-                           placeholder="Your password" className='registerPage-edit-field' type="password"/>
-                </fieldset>
-                <fieldset>
-                    <input required={true} onChange={(e) => setEmail(e.currentTarget.value)} placeholder="Your email"
-                           className='registerPage-edit-field' type="text"/>
-                </fieldset>
-                {enableUniqCodeField &&
-                <fieldset>
-                    <input required={true} onChange={(e) => setUniqCode(e.currentTarget.value)}
-                           placeholder="Type uniq code from ur mail"
-                           className='registerPage-edit-field' type="text"/>
-                </fieldset>
-                }
-                {!enableUniqCodeField ?
-                    <fieldset>
-                        <button onClick={(e) => sendUniqCode(e)}
-                                className={"form-button"}>
-                            Register
-                        </button>
-                    </fieldset>
-                    :
-                    <fieldset>
-                        <button onClick={(e) => checkUniqCodes(e)} disabled={uniqCode.length !== 6}
-                                className={uniqCode.length !== 6 ? " error-button form-button" : "form-button"}>
-                            Confirm
-                        </button>
-                    </fieldset>
-                }
-                {
-                    isUniqCode && <fieldset>
-                        <button onClick={(e) => registerUser(e)}
-                                className={"form-button"}>
-                            Register
-                        </button>
-                    </fieldset>
-                }
 
-                <fieldset>
-                    <NavLink to={RouteNames.LOGIN} className='form-button'>
-                        I have the account
-                    </NavLink>
+            <form className='form-wrapper'>
+                <fieldset className="form-field-wrapper">
+                    <label className='form-field-label' htmlFor="login-field">
+                        Login
+                    </label>
+                    <input placeholder="Your login" onChange={(e) => setLogin(e.currentTarget.value)}
+                           className='form-field' type="text" id="login-field"/>
                 </fieldset>
+                <fieldset className="form-field-wrapper">
+                    <label className='form-field-label' htmlFor="login-field">
+                        Username
+                    </label>
+                    <input placeholder="Your username" onChange={(e) => setUsername(e.currentTarget.value)}
+                           className='form-field' type="text" id="login-field"/>
+                </fieldset>
+                <fieldset className="form-field-wrapper">
+                    <label className='form-field-label' htmlFor="login-field">
+                        Email
+                    </label>
+                    <input required={true} onChange={(e) => setEmail(e.currentTarget.value)} placeholder="Your email"
+                           className='form-field' type="text" id="login-field"/>
+                </fieldset>
+                <fieldset className="form-field-wrapper">
+                    <label className='form-field-label' htmlFor="login-field">
+                        Password
+                    </label>
+                    <input autoComplete="new-password" onChange={(e) => setPassword(e.currentTarget.value)}
+                           placeholder="Your password" className='form-field' type="password" id="login-field"/>
+                </fieldset>
+                <fieldset className="form-field-wrapper">
+                    <button onClick={(e) => sendUniqCode(e)} className='form-field-button'>Register</button>
+                </fieldset>
+                <fieldset className="form-field-wrapper">
+                    <NavLink to={'/login'}>I have the account</NavLink>
+                </fieldset>
+                {/*<fieldset>*/}
+                {/*    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login"*/}
+                {/*           className='registerPage-edit-field' type="text"/>*/}
+                {/*</fieldset>*/}
+                {/*<fieldset>*/}
+                {/*    <input required={true} onChange={(e) => setUsername(e.currentTarget.value)}*/}
+                {/*           placeholder="Your username" className='registerPage-edit-field' type="text"/>*/}
+                {/*</fieldset>*/}
+                {/*<fieldset>*/}
+                {/*    <input autoComplete="new-password" required={true} onChange={(e) => setPassword(e.currentTarget.value)}*/}
+                {/*           placeholder="Your password" className='registerPage-edit-field' type="password"/>*/}
+                {/*</fieldset>*/}
+                {/*<fieldset>*/}
+                {/*    <input required={true} onChange={(e) => setEmail(e.currentTarget.value)} placeholder="Your email"*/}
+                {/*           className='registerPage-edit-field' type="text"/>*/}
+                {/*</fieldset>*/}
+                {/*{enableUniqCodeField &&*/}
+                {/*<fieldset>*/}
+                {/*    <input required={true} onChange={(e) => setUniqCode(e.currentTarget.value)}*/}
+                {/*           placeholder="Type uniq code from ur mail"*/}
+                {/*           className='registerPage-edit-field' type="text"/>*/}
+                {/*</fieldset>*/}
+                {/*}*/}
+                {/*{!enableUniqCodeField ?*/}
+                {/*    <fieldset>*/}
+                {/*        <button onClick={(e) => sendUniqCode(e)}*/}
+                {/*                className={"form-button"}>*/}
+                {/*            Register*/}
+                {/*        </button>*/}
+                {/*    </fieldset>*/}
+                {/*    :*/}
+                {/*    <fieldset>*/}
+                {/*        <button onClick={(e) => checkUniqCodes(e)} disabled={uniqCode.length !== 6}*/}
+                {/*                className={uniqCode.length !== 6 ? " error-button form-button" : "form-button"}>*/}
+                {/*            Confirm*/}
+                {/*        </button>*/}
+                {/*    </fieldset>*/}
+                {/*}*/}
+                {/*{*/}
+                {/*    isUniqCode && <fieldset>*/}
+                {/*        <button onClick={(e) => registerUser(e)}*/}
+                {/*                className={"form-button"}>*/}
+                {/*            Register*/}
+                {/*        </button>*/}
+                {/*    </fieldset>*/}
+                {/*}*/}
+
+                {/*<fieldset>*/}
+                {/*    <NavLink to={RouteNames.LOGIN} className='form-button'>*/}
+                {/*        I have the account*/}
+                {/*    </NavLink>*/}
+                {/*</fieldset>*/}
             </form>
             <section className='profile-peculiarities-wrapper'>
                 <section className='profile-peculiarities'>

@@ -28,22 +28,31 @@ export const Login:FC = () => {
     return (
         <article className="registerPage-wrapper">
             <form className='form-wrapper'>
-                <fieldset>
-                    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login" className='registerPage-edit-field' type="text"/>
+                <fieldset className="form-field-wrapper">
+                    <label className='form-field-label' htmlFor="login-field">
+                        Login
+                    </label>
+                    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login" className='form-field' type="text"/>
                 </fieldset>
-                <fieldset>
-                    <input required={true} onChange={(e) => setUsername(e.currentTarget.value)} placeholder="Your username" className='registerPage-edit-field' type="text"/>
+                <fieldset className="form-field-wrapper">
+                    <label className='form-field-label' htmlFor="login-field">
+                        Username
+                    </label>
+                    <input required={true} onChange={(e) => setUsername(e.currentTarget.value)} placeholder="Your username" className='form-field' type="text"/>
                 </fieldset>
-                <fieldset>
-                    <input required={true} onChange={(e) => setPassword(e.currentTarget.value)} placeholder="Your password" className='registerPage-edit-field' type="password"/>
+                <fieldset className="form-field-wrapper">
+                    <label className='form-field-label' htmlFor="login-field">
+                        Password
+                    </label>
+                    <input autoComplete="new-password" required={true} onChange={(e) => setPassword(e.currentTarget.value)} placeholder="Your password" className='form-field' type="password"/>
                 </fieldset>
-                <fieldset>
-                    <button onClick={(e) => registerUser(e)} className='form-button'>
+                <fieldset className="form-field-wrapper">
+                    <button onClick={(e) => registerUser(e)} className='form-field-button'>
                         Login
                     </button>
                 </fieldset>
-                <fieldset>
-                    <NavLink to={RouteNames.REGISTER} className='form-button'>
+                <fieldset className="form-field-wrapper">
+                    <NavLink to={RouteNames.REGISTER}>
                         I haven't got the account
                     </NavLink>
                 </fieldset>

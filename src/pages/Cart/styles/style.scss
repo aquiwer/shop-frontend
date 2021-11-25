@@ -3,13 +3,16 @@
 .cart-body {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cart-wrapper {
   padding: 20px 0;
   margin: 60px 0;
   border-radius: 15px;
-  background-color: $lightBlue;
+  background-color: $darkRed;
+  filter: drop-shadow(4px 4px 5px black);
   width: calc(100% - 350px);
   display: flex;
   flex-direction: column;
@@ -57,5 +60,13 @@
   background-color: $green;
 }
 .button-buy{
-  background-color: $blue;
+  background-color: $darkBlack;
+}
+
+.cart-cards-wrapper {
+  padding: 120px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 120px;
 }

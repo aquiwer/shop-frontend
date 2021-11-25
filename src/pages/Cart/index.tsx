@@ -8,6 +8,7 @@ import {NavLink} from "react-router-dom";
 import {useTypedSelector} from "../../utils/hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
 import {getProductsFromCartThunk} from "../../store/thunks/product-thunk";
+import {ImgCard} from "../../components/ImgCards";
 
 export const Cart: FC = () => {
     const dispatch = useDispatch();
@@ -47,6 +48,11 @@ export const Cart: FC = () => {
                     <div><NavLink className='non-saved-link' to={'/'}>Go to shop</NavLink></div>
                 </section>
             }
+            <section className='cart-cards-wrapper'>
+                {
+                    [1, 2, 3].map(i => <ImgCard key={i}/>)
+                }
+            </section>
         </article>
     );
 };

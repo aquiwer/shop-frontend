@@ -16,6 +16,7 @@
 }
 
 .profile-user-avatar {
+  cursor: pointer;
   background-color: $red;
   width: 85px;
   height: 85px;
@@ -24,6 +25,7 @@
   place-items: center;
   font-size: 55px;
   color: $defaultColor;
+  transition: .5s;
 }
 
 .profile-edit-elems-form {
@@ -100,11 +102,44 @@
   color: $defaultColor;
   font-size: 18px;
 }
-
+.file-input{
+  transition: .3s;
+}
 .profile-cards-wrapper {
   padding: 120px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 120px;
+}
+
+.profile-file-input__input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  transition: .5s;
+}
+
+.profile-file-input__label {
+  transition: .5s;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 85px;
+  height: 85px;
+  color: #fff;
+  padding: 10px 12px;
+  background-color: $red;;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+.profile-file-input__label svg {
+  height: 16px;
+  margin-right: 4px;
 }

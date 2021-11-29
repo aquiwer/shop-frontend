@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mui/core": "^5.0.0-alpha.54",
+    "@mui/material": "^5.1.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -10,6 +12,7 @@
     "@types/node": "^12.20.27",
     "@types/react": "^17.0.26",
     "@types/react-dom": "^17.0.9",
+    "@types/react-modal": "^3.13.1",
     "@types/react-router-dom": "^5.3.0",
     "@types/react-tabs": "^2.3.3",
     "@types/redux-thunk": "^2.1.0",
@@ -20,6 +23,7 @@
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-modal": "^3.14.4",
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
@@ -52,5 +56,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/material-ui": "^0.21.12",
+    "@types/react-tap-event-plugin": "^0.0.31"
   }
 }

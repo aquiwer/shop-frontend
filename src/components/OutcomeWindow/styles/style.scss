@@ -7,8 +7,8 @@
   gap: 15px;
   width: 1200px;
   height: 500px;
-  background: rgba(35, 98, 213, 0.14);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: rgba(213, 35, 35, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(187, 27, 27, 0.73);
   backdrop-filter: blur(8.5px);
   -webkit-backdrop-filter: blur(8.5px);
   border-radius: 10px;
@@ -30,7 +30,7 @@
   height: 100px;
   padding: 20px;
   border-radius: 50%;
-  background-color: $blue;
+  background-color: $red;
 }
 
 .window-title{
@@ -42,7 +42,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $blue;
+  background-color: $red;
   padding: 10px;
   border-radius: 15px;
   button{

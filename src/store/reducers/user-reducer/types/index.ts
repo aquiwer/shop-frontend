@@ -5,20 +5,25 @@ export interface IUser {
     email: string,
     balance?: number,
     photo?: string
-    isAuth?: boolean ,
-    _id?: string
+    isAuth?: boolean,
+    _id?: string,
+    cart?: Array<any>,
+    liked?: Array<string>,
+
 }
 
 export interface IUserState {
     user: IUser,
-    isUniqCode: boolean
+    isUniqCode: boolean,
+
 }
 
 export enum UserActionEnum {
     SET_USER = "SET_USER",
     CHANGE_USER = "CHANGE_USER",
     EXIT = "EXIT",
-    SET_UNIQ_CODE = "SET_UNIQ_CODE"
+    SET_UNIQ_CODE = "SET_UNIQ_CODE",
+    ADD_TO_FAVS = "ADD_TO_FAVS",
 }
 
 export interface setUserAction {
@@ -36,9 +41,19 @@ export interface setUniqCodeAction {
     payload: boolean
 }
 
+export interface setFavsAction {
+    type: UserActionEnum.ADD_TO_FAVS,
+    payload: IUser
+}
+
 export interface setExitedChangingAction {
     type: UserActionEnum.EXIT,
     payload: boolean
 }
 
-export type IUserAction = setUserAction | setUsersChangingAction | setExitedChangingAction | setUniqCodeAction;
+export type IUserAction =
+    setUserAction
+    | setUsersChangingAction
+    | setExitedChangingAction
+    | setUniqCodeAction
+    | setFavsAction;

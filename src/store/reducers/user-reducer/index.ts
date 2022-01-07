@@ -10,6 +10,8 @@ const initialState: IUserState = {
         balance: 0,
         photo: "",
         isAuth: false,
+        cart: [],
+        liked: []
     }
 }
 
@@ -28,6 +30,8 @@ export const userReducer = (state = initialState, action: IUserAction) => {
                 ...state,
                 user: {login: "", username: "", password: "", email: "", balance: 0, isAuth: action.payload}
             }
+        case UserActionEnum.ADD_TO_FAVS:
+            return {...state, favorites: action.payload}
         default:
             return state;
     }

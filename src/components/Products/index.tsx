@@ -9,15 +9,17 @@ import {productTabsRoute} from "./Product/filterRouter";
 import {useDispatch} from "react-redux";
 import {getProductsSectionThunk} from "../../store/thunks/product-thunk";
 import {OutcomeWindow} from "../OutcomeWindow";
+import ReactNotification, {store} from "react-notifications-component";
 
 
 export const Products = () => {
     const currentTab = useTypedSelector(state => state.productReducer.currentTab)
-    const isShow = useTypedSelector(state => state.helperReducer.isShow)
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getProductsSectionThunk(currentTab))
     }, [])
+
     const products = useTypedSelector(state => state.productReducer.products);
     return (
         <>
@@ -46,7 +48,6 @@ export const Products = () => {
                                                                       describe={item.describe}/>)
                         }
                     </section>
-                    <OutcomeWindow isShow={isShow} type='success'/>
                 </section>
             </article>
         </>

@@ -11,7 +11,8 @@ const initialState: IProductState = {
         describe: "",
         _id: "",
         __v: 0
-    }
+    },
+    isAdded: false
 }
 
 export const productReducer = (state = initialState, action: IProductAction) => {
@@ -22,6 +23,8 @@ export const productReducer = (state = initialState, action: IProductAction) => 
             return {...state, products: action.payload}
         case ProductActionEnum.GET_CURRENT_PRODUCT:
             return {...state, currentProduct: action.payload}
+        case ProductActionEnum.SET_IS_ADDED:
+            return {...state, isAdded: action.payload}
         default:
             return state;
     }

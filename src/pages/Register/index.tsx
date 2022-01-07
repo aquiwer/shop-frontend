@@ -1,41 +1,54 @@
 import React, {FC, useEffect, useState} from 'react';
+import {useDispatch} from "react-redux";
+import {NavLink} from "react-router-dom";
+import Modal from 'react-modal';
+import ReactNotification, { store } from 'react-notifications-component'
+
+import {useTypedSelector} from "../../utils/hooks/useTypedSelector";
+import {userCheckUniqCodesThunk, userRegisterThunk, userSendUniqCodeThunk} from "../../store/thunks/user-thunk";
+
 import discount from "../../assets/icons/discount.svg";
 import delivery from "../../assets/icons/delivery.svg";
 import support from "../../assets/icons/support.svg";
 import {ImgCard} from "../../components/ImgCards";
+
+
 import './styles/style.scss'
-import {useDispatch} from "react-redux";
-import {userCheckUniqCodesThunk, userRegisterThunk, userSendUniqCodeThunk} from "../../store/thunks/user-thunk";
-import {NavLink} from "react-router-dom";
-import {RouteNames} from "../../router/router";
-import {useTypedSelector} from "../../utils/hooks/useTypedSelector";
-import Modal from 'react-modal';
+import 'react-notifications-component/dist/theme.css'
+import {HelperActionCreator} from "../../store/action-creators";
 
 export const Register: FC = () => {
+
+
+
     const [username, setUsername] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [uniqCode, setUniqCode] = useState("");
-    // const [enableUniqCodeField, setEnableUniqCodeField] = useState(false);
-    const isUniqCode = useTypedSelector(state => state.userReducer.isUniqCode);
-    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [modalIsOpen, setIsOpen] = useState(false);
 
-    function openModal() {
-        setIsOpen(true);
-    }
+    const isUniqCode = useTypedSelector(state => state.userReducer.isUniqCode);
+
 
 
     function closeModal() {
         setIsOpen(false);
     }
 
+
+
     useEffect(() => {
         if (isUniqCode) {
             closeModal();
             dispatch(userRegisterThunk({login, username, email, password}))
+
+
+
         }
     }, [isUniqCode])
+
+
 
     const customStyles = {
         content: {
@@ -54,6 +67,11 @@ export const Register: FC = () => {
     };
     const dispatch = useDispatch();
 
+    const registerUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+
+    }
+
     const checkUniqCodes = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         if (uniqCode.length === 6) {
@@ -67,27 +85,22 @@ export const Register: FC = () => {
             dispatch(userSendUniqCodeThunk(email));
         }
     }
-    const registerUser = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-
-    }
 
 
-    // @ts-ignore
     return (
         <article className="registerPage-wrapper">
+
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
-                contentLabel="Example Modal"
             >
                 <p>We sent to your mail special code, please copy and paste it.</p>
                 <fieldset className="form-field-wrapper">
                     <label className='form-field-label' htmlFor="login-field">
                         Uniq Code
                     </label>
-                    <input placeholder="XXX-XXX" onChange={(e) => setUniqCode(e.currentTarget.value)}
+                    <input placeholder="XXX-XXX" maxLength={6} onChange={(e) => setUniqCode(e.currentTarget.value)}
                            className='form-field' type="text" id="code-field"/>
                 </fieldset>
                 <fieldset className="form-field-wrapper">
@@ -135,58 +148,6 @@ export const Register: FC = () => {
                 <fieldset className="form-field-wrapper">
                     <NavLink to={'/login'}>I have the account</NavLink>
                 </fieldset>
-                {/*<fieldset>*/}
-                {/*    <input required={true} onChange={(e) => setLogin(e.currentTarget.value)} placeholder="Your login"*/}
-                {/*           className='registerPage-edit-field' type="text"/>*/}
-                {/*</fieldset>*/}
-                {/*<fieldset>*/}
-                {/*    <input required={true} onChange={(e) => setUsername(e.currentTarget.value)}*/}
-                {/*           placeholder="Your username" className='registerPage-edit-field' type="text"/>*/}
-                {/*</fieldset>*/}
-                {/*<fieldset>*/}
-                {/*    <input autoComplete="new-password" required={true} onChange={(e) => setPassword(e.currentTarget.value)}*/}
-                {/*           placeholder="Your password" className='registerPage-edit-field' type="password"/>*/}
-                {/*</fieldset>*/}
-                {/*<fieldset>*/}
-                {/*    <input required={true} onChange={(e) => setEmail(e.currentTarget.value)} placeholder="Your email"*/}
-                {/*           className='registerPage-edit-field' type="text"/>*/}
-                {/*</fieldset>*/}
-                {/*{enableUniqCodeField &&*/}
-                {/*<fieldset>*/}
-                {/*    <input required={true} onChange={(e) => setUniqCode(e.currentTarget.value)}*/}
-                {/*           placeholder="Type uniq code from ur mail"*/}
-                {/*           className='registerPage-edit-field' type="text"/>*/}
-                {/*</fieldset>*/}
-                {/*}*/}
-                {/*{!enableUniqCodeField ?*/}
-                {/*    <fieldset>*/}
-                {/*        <button onClick={(e) => sendUniqCode(e)}*/}
-                {/*                className={"form-button"}>*/}
-                {/*            Register*/}
-                {/*        </button>*/}
-                {/*    </fieldset>*/}
-                {/*    :*/}
-                {/*    <fieldset>*/}
-                {/*        <button onClick={(e) => checkUniqCodes(e)} disabled={uniqCode.length !== 6}*/}
-                {/*                className={uniqCode.length !== 6 ? " error-button form-button" : "form-button"}>*/}
-                {/*            Confirm*/}
-                {/*        </button>*/}
-                {/*    </fieldset>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    isUniqCode && <fieldset>*/}
-                {/*        <button onClick={(e) => registerUser(e)}*/}
-                {/*                className={"form-button"}>*/}
-                {/*            Register*/}
-                {/*        </button>*/}
-                {/*    </fieldset>*/}
-                {/*}*/}
-
-                {/*<fieldset>*/}
-                {/*    <NavLink to={RouteNames.LOGIN} className='form-button'>*/}
-                {/*        I have the account*/}
-                {/*    </NavLink>*/}
-                {/*</fieldset>*/}
             </form>
             <section className='profile-peculiarities-wrapper'>
                 <section className='profile-peculiarities'>

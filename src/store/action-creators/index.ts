@@ -1,6 +1,6 @@
 import {
     IUser,
-    setExitedChangingAction, setUniqCodeAction,
+    setExitedChangingAction, setFavsAction, setUniqCodeAction,
     setUserAction,
     setUsersChangingAction,
     UserActionEnum
@@ -9,7 +9,7 @@ import {
     IProduct,
     ProductActionEnum,
     setCurrentProduct,
-    setCurrentTabAction,
+    setCurrentTabAction, setIsAdded,
     setProductAction
 } from "../reducers/product-reducer/types";
 import {
@@ -19,7 +19,12 @@ import {
     ICart,
     setToCartAction
 } from "../reducers/cart-reducer/types";
-import {HelperActionEnum, setIsShow} from "../reducers/helper-reducer/types";
+import {
+    HelperActionEnum,
+    notificationTypes,
+    setIsShowNotification, setNotificationMessage, setNotificationTitle,
+    setTypeOfNotification
+} from "../reducers/helper-reducer/types";
 
 export const UserActionCreators = {
     setUser: (user: IUser): setUserAction => ({type: UserActionEnum.SET_USER, payload: user}),
@@ -28,6 +33,10 @@ export const UserActionCreators = {
     setUniqCode: (isAvailable: boolean): setUniqCodeAction => ({
         type: UserActionEnum.SET_UNIQ_CODE,
         payload: isAvailable
+    }),
+    addToFav: (favorites: IUser): setFavsAction => ({
+        type: UserActionEnum.ADD_TO_FAVS,
+        payload: favorites
     }),
 }
 
@@ -39,6 +48,10 @@ export const ProductsActionCreators = {
     setCurrentTab: (tab: string): setCurrentTabAction => ({
         type: ProductActionEnum.SET_CURRENT_TAB,
         payload: tab
+    }),
+    setIsAdded: (isAdded: boolean): setIsAdded => ({
+        type: ProductActionEnum.SET_IS_ADDED,
+        payload: isAdded
     }),
     addToCart: (products: Array<ICart>): setToCartAction => ({type: CartActionEnum.SET_TO_CART, payload: products}),
     getForCart: (products: Array<IProduct>): getInCartAction => ({type: CartActionEnum.GET_IN_CART, payload: products}),
@@ -55,8 +68,20 @@ export const ProductsActionCreators = {
 
 
 export const HelperActionCreator = {
-    setIsShow: (isShow: boolean): setIsShow => ({
-        type: HelperActionEnum.SET_IS_SHOW,
-        payload: isShow
+    setTypeOfNotification: (typeOfNotification: notificationTypes): setTypeOfNotification => ({
+        type: HelperActionEnum.SET_TYPE_OF_NOTIFICATION,
+        payload: typeOfNotification
+    }),
+    setIsShowNotification: (isShowNotification: boolean): setIsShowNotification => ({
+        type: HelperActionEnum.SET_IS_SHOW_NOTIFICATION,
+        payload: isShowNotification
+    }),
+    setNotificationTitle: (notificationTitle: string): setNotificationTitle => ({
+        type: HelperActionEnum.SET_NOTIFICATION_TITLE,
+        payload: notificationTitle
+    }),
+    setNotificationMessage: (notificationMessage: string): setNotificationMessage => ({
+        type: HelperActionEnum.SET_NOTIFICATION_MESSAGE,
+        payload: notificationMessage
     })
 }

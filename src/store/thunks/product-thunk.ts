@@ -2,6 +2,7 @@ import {AppDispatch} from "../state";
 import {Api} from "../../server/agent";
 import {HelperActionCreator, ProductsActionCreators} from "../action-creators";
 import {ICart} from "../reducers/cart-reducer/types";
+import {setTypeOfNotification} from "../reducers/helper-reducer/types";
 
 export const getProductsFromCartThunk = () => {
     return async (dispatch: AppDispatch) => {
@@ -14,12 +15,20 @@ export const getProductsFromCartThunk = () => {
     }
 }
 
-export const addToCartThunk = (productData: ICart) => {
+export const addToCartThunk = (userId: string | undefined, productData: ICart) => {
     return async (dispatch: AppDispatch) => {
         try {
-            const response = await Api.addToCart(productData).then(() => dispatch(HelperActionCreator.setIsShow(true)));
+            const response = await Api.addToCart(userId, productData).then(() => {
+                dispatch(HelperActionCreator.setTypeOfNotification("info"))
+                dispatch(HelperActionCreator.setNotificationTitle("Great!"))
+                dispatch(HelperActionCreator.setNotificationMessage("Product was added! Thank u!"))
+                dispatch(HelperActionCreator.setIsShowNotification(true))
+            });
+
             //@ts-ignore
             dispatch(ProductsActionCreators.addToCart(response))
+
+
         } catch (e: any) {
             console.error(e)
         }

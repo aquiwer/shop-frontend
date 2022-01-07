@@ -14,6 +14,7 @@ import {log} from "util";
 
 export const Profile = () => {
     const [editMode, setEditMode] = useState(false);
+
     const userData = useTypedSelector(state => state.userReducer.user)
     const dispatch = useDispatch();
     const [username, setUserName] = useState(userData.username);
@@ -143,7 +144,7 @@ export const Profile = () => {
                                             setEditMode(true)
                                         }
                                         }><img
-                                            className='profile-edit-elem-icon' src={pencil} alt=""/></button>
+                                            className='profile-edit-elem-icon' src={pencil} alt="pencil"/></button>
                                     </div>
                                 </section>
                         }
@@ -154,7 +155,7 @@ export const Profile = () => {
                                 <section className='profile-edit-data-container'>
                                     <div>
                                         <input onChange={(e) => setPassword(e.currentTarget.value)}
-                                               placeholder="Your new password" className='profile-edit-field'
+                                               placeholder="Your new password" className='profile-edit-field' autoComplete="new-password"
                                                type="password"/></div>
                                     <div>
                                         <button onClick={(e) => setNewData(e)}>

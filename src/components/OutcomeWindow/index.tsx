@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './styles/style.scss'
 import successIcon from '../../assets/icons/check.svg'
 import errorIcon from '../../assets/icons/cancel.svg'
 import arrowIcon from '../../assets/icons/arrowRight.svg'
 import {useDispatch} from "react-redux";
 import {HelperActionCreator} from "../../store/action-creators";
+import {notificationTypes} from "../../store/reducers/helper-reducer/types";
 
 interface IOutcomeWindow {
-    isShow: boolean
+    isShow: notificationTypes
     type: string
 }
 
@@ -15,7 +16,7 @@ export const OutcomeWindow = ({isShow, type}: IOutcomeWindow) => {
     const dispatch = useDispatch();
 
     const closeWindow = () => {
-        dispatch(HelperActionCreator.setIsShow(false))
+        dispatch(HelperActionCreator.setTypeOfNotification("success"))
     }
     return (
         <>

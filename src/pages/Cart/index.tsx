@@ -10,15 +10,17 @@ import {useDispatch} from "react-redux";
 import {getProductsFromCartThunk} from "../../store/thunks/product-thunk";
 import {ImgCard} from "../../components/ImgCards";
 
+
 export const Cart: FC = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProductsFromCartThunk())
     }, [])
-    const cartItems = useTypedSelector(state => state.cartReducer.cartItems);
+    const cartItems = useTypedSelector(state => state.userReducer.user.cart);
     return (
         <article className='cart-body'>
-            { cartItems.length > 0 ? <section className='cart-wrapper'>
+            { [cartItems].length > 0 ? <section className='cart-wrapper'>
+
 
                 <div>{cartItems && cartItems.map(i => <CartItem _id={i._id} title={i.title} describe={i.describe}
                                                                 price={i.price} count={i.count} photo={i.photo} key={i._id}/>)}</div>
@@ -50,9 +52,9 @@ export const Cart: FC = () => {
             }
             <section className='cart-cards-wrapper'>
                 {
-                    [1, 2, 3].map(i => <ImgCard key={i}/>)
-                }
-            </section>
+                     [1, 2, 3].map(i => <ImgCard key={i}/>)
+            }
+        </section>
         </article>
     );
 };

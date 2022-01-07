@@ -14,6 +14,11 @@ export const Api = {
             instance.post(`register`, userData).then(res => res.data)
         )
     },
+    addToFav(userData: IUser) {
+        return (
+            instance.post(`favorite`, userData).then(res => res.data)
+        )
+    },
     login(userData: ILogin) {
 
         return (
@@ -41,9 +46,9 @@ export const Api = {
           instance.post('newUniqCode', {email}).then(res => res.data)
       )
     },
-    addToCart(productData: ICart) {
+    addToCart(userId:string | undefined, productData: ICart) {
         return (
-            instance.post("cart", productData).then(res => res.data)
+            instance.post("cart", {userId,productData}).then(res => res.data)
         )
     },
 

@@ -1,14 +1,22 @@
 import {AppDispatch} from "../state";
 import {Api} from "../../server/agent";
 import {ILogin, IRegister} from "../../server/types";
-import {UserActionCreators} from "../action-creators";
+import {HelperActionCreator, UserActionCreators} from "../action-creators";
 import {IUser} from "../reducers/user-reducer/types";
 
 export const userRegisterThunk = (userData: IRegister) => {
     return async (dispatch: AppDispatch) => {
         try {
 
-            const response = await Api.createAccount(userData);
+            const response = await Api.createAccount(userData)
+
+            if (response) {
+                dispatch(HelperActionCreator.setTypeOfNotification("success"))
+                dispatch(HelperActionCreator.setNotificationTitle("Successful registration!"))
+                dispatch(HelperActionCreator.setNotificationMessage("Thank u, that choose us <3"))
+                dispatch(HelperActionCreator.setIsShowNotification(true))
+            }
+
             console.log(response, "response")
             //@ts-ignore
             dispatch(UserActionCreators.setUser(response))
@@ -17,7 +25,19 @@ export const userRegisterThunk = (userData: IRegister) => {
         }
     }
 }
+export const userAddToFavThunk = (userData: IRegister) => {
+    return async (dispatch: AppDispatch) => {
+        try {
 
+            const response = await Api.addToFav(userData);
+            console.log(response, "response")
+            //@ts-ignore
+            dispatch(UserActionCreators.addToFav(response))
+        } catch (e: any) {
+            console.error(e)
+        }
+    }
+}
 
 export const userSendUniqCodeThunk = (email: string) => {
 
